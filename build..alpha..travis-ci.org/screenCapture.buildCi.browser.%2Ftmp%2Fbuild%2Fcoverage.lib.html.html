@@ -1,0 +1,1087 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-cloudant/node_modules/cloudant/cloudant.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-cloudant">npmtest-cloudant (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-cloudant/node_modules/cloudant/cloudant.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">6.11% <small>(8 / 131)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">6.11% <small>(8 / 131)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-cloudant/node_modules/cloudant/</a> » cloudant.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = Cloudant;
+&nbsp;
+/**
+ * Copyright (c) 2016 IBM Cloudant, Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+&nbsp;
+var Nano = require('cloudant-nano');
+var debug = require('debug')('cloudant');
+var nanodebug = require('debug')('nano');
+var async = require('async');
+&nbsp;
+&nbsp;
+// function from the old Cloudant library to
+// parse an object { account: "myaccount", password: "mypassword"}
+// and return a URL
+var reconfigure = require('./lib/reconfigure.js')
+&nbsp;
+// This IS the Cloudant API. It is mostly nano, with a few functions.
+<span class="fstat-no" title="function not covered">function Cloudant(options, callback) {</span>
+<span class="cstat-no" title="statement not covered">  debug('Initialize', options);</span>
+&nbsp;
+  // Save the username and password for potential conversion to cookie auth.
+<span class="cstat-no" title="statement not covered">  var login = reconfigure.getOptions(options);</span>
+&nbsp;
+  // Convert the credentials into a URL that will work for cloudant. The
+  // credentials object will become squashed into a string, which is fine
+  // except for the .cookie option.
+<span class="cstat-no" title="statement not covered">  var cookie = options.cookie;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var pkg = require('./package.json');</span>
+<span class="cstat-no" title="statement not covered">  var useragent = "nodejs-cloudant/" + pkg.version + " (Node.js " + process.version + ")";</span>
+<span class="cstat-no" title="statement not covered">  var requestDefaults = { headers: { "User-agent": useragent}, gzip:true  };</span>
+<span class="cstat-no" title="statement not covered">  var theurl = null;</span>
+<span class="cstat-no" title="statement not covered">  if (typeof options == "object") {</span>
+<span class="cstat-no" title="statement not covered">    if (options.requestDefaults) {</span>
+<span class="cstat-no" title="statement not covered">      requestDefaults = options.requestDefaults;</span>
+    }
+<span class="cstat-no" title="statement not covered">    theurl = reconfigure(options);</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    theurl = reconfigure({ url: options})</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (theurl === null) {</span>
+<span class="cstat-no" title="statement not covered">    if (callback) {</span>
+<span class="cstat-no" title="statement not covered">      return callback('invalid url', null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      throw(new Error('invalid url'));</span>
+    }
+  }
+&nbsp;
+  // keep connections alive by default
+<span class="cstat-no" title="statement not covered">  if (requestDefaults &amp;&amp; !requestDefaults.agent) {</span>
+<span class="cstat-no" title="statement not covered">    var protocol = (theurl.match(/^https/))? require('https') : require('http');</span>
+<span class="cstat-no" title="statement not covered">    var agent = new protocol.Agent({ keepAlive:true });</span>
+<span class="cstat-no" title="statement not covered">    requestDefaults.agent = agent;</span>
+  } 
+&nbsp;
+  // plugin a request library
+<span class="cstat-no" title="statement not covered">  var plugin = null;</span>
+<span class="cstat-no" title="statement not covered">  if (options.plugin) {</span>
+<span class="cstat-no" title="statement not covered">    options.requestDefaults = requestDefaults;</span>
+<span class="cstat-no" title="statement not covered">    if(typeof options.plugin === 'string') {</span>
+<span class="cstat-no" title="statement not covered">      var plugintype = options.plugin || 'default';</span>
+<span class="cstat-no" title="statement not covered">      debug('Using the "' + plugintype + '" plugin');</span>
+<span class="cstat-no" title="statement not covered">      plugin =  require('./plugins/' + plugintype)(options);</span>
+    } else <span class="cstat-no" title="statement not covered">if (typeof options.plugin === 'function') { </span>
+<span class="cstat-no" title="statement not covered">      debug('Using a custom plugin');</span>
+<span class="cstat-no" title="statement not covered">      plugin = options.plugin;</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  debug('Create underlying Nano instance, options=%j requestDefaults=%j', options, requestDefaults);</span>
+<span class="cstat-no" title="statement not covered">  var nano = Nano({url:theurl, request: plugin, requestDefaults: requestDefaults, cookie: cookie, log: nanodebug});</span>
+&nbsp;
+  // our own implementation of 'use' e.g. nano.use or nano.db.use
+  // it includes all db-level functions
+<span class="cstat-no" title="statement not covered">  var use = <span class="fstat-no" title="function not covered">function(db) {</span></span>
+&nbsp;
+    // ****************
+    // Functions added to each db e.g. cloudant.use("mydb")
+    // ****************
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var bulk_get = <span class="fstat-no" title="function not covered">function(options, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      return nano.request( { path: encodeURIComponent(db) + "/_bulk_get",</span>
+                             method: "post",
+                             body: options }, callback)
+    };
+&nbsp;
+    // https://docs.cloudant.com/geo.html
+<span class="cstat-no" title="statement not covered">    var geo = <span class="fstat-no" title="function not covered">function(docName, indexName, query, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      var path = encodeURIComponent(db) + "/_design/" +</span>
+                 encodeURIComponent(docName) + "/_geo/" +
+                 encodeURIComponent(indexName);
+<span class="cstat-no" title="statement not covered">      return nano.request({path:path, qs:query}, callback);</span>
+    };
+&nbsp;
+    // https://docs.cloudant.com/api.html#viewing-permissions
+<span class="cstat-no" title="statement not covered">    var get_security = <span class="fstat-no" title="function not covered">function(callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      var path = "_api/v2/db/" + encodeURIComponent(db) + "/_security";</span>
+<span class="cstat-no" title="statement not covered">      return nano.request( { path: path}, callback);</span>
+    };
+&nbsp;
+    // https://docs.cloudant.com/api.html#modifying-permissions
+<span class="cstat-no" title="statement not covered">    var set_security = <span class="fstat-no" title="function not covered">function(permissions, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      var path = "_api/v2/db/" + encodeURIComponent(db) + "/_security";</span>
+<span class="cstat-no" title="statement not covered">      return nano.request( { path: path,</span>
+                             method: "put",
+                             body: {cloudant: permissions} }, callback);
+    };
+&nbsp;
+    // https://docs.cloudant.com/api.html#list-all-indexes &amp;
+    // https://docs.cloudant.com/api.html#creating-a-new-index
+<span class="cstat-no" title="statement not covered">    var index = <span class="fstat-no" title="function not covered">function(definition, callback) {</span></span>
+&nbsp;
+      // if no definition is provided, then the user wants see all the indexes
+<span class="cstat-no" title="statement not covered">      if (typeof definition == "function") {</span>
+<span class="cstat-no" title="statement not covered">        callback = definition;</span>
+<span class="cstat-no" title="statement not covered">        nano.request({ path: encodeURIComponent(db) + "/_index" }, callback);</span>
+      } else {
+        // the user wants to create a new index
+<span class="cstat-no" title="statement not covered">        return nano.request({ path: encodeURIComponent(db) + "/_index",</span>
+                              method:"post",
+                              body: definition}, callback);
+      }
+    };
+&nbsp;
+    // https://docs.cloudant.com/api.html#deleting-an-index
+<span class="cstat-no" title="statement not covered">    var index_del = <span class="fstat-no" title="function not covered">function(spec, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      spec = spec || {};</span>
+<span class="cstat-no" title="statement not covered">      if (!spec.ddoc)</span>
+<span class="cstat-no" title="statement not covered">        throw new Error('index.del() must specify a "ddoc" value');</span>
+<span class="cstat-no" title="statement not covered">      if (!spec.name)</span>
+<span class="cstat-no" title="statement not covered">        throw new Error('index.del() must specify a "name" value');</span>
+<span class="cstat-no" title="statement not covered">      var type = spec.type || 'json';</span>
+<span class="cstat-no" title="statement not covered">      var path = encodeURIComponent(db) + "/_index/" +</span>
+                 encodeURIComponent(spec.ddoc) + "/" +
+                 encodeURIComponent(type) + "/" +
+                 encodeURIComponent(spec.name);
+<span class="cstat-no" title="statement not covered">      return nano.request({ path:path, method:"delete"}, callback);</span>
+    };
+&nbsp;
+    // https://docs.cloudant.com/api.html#finding-documents-using-an-index
+<span class="cstat-no" title="statement not covered">    var find = <span class="fstat-no" title="function not covered">function(query, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">      return nano.request( { path: encodeURIComponent(db) + "/_find",</span>
+                             method: "post",
+                             body: query}, callback);
+    };
+&nbsp;
+    // add Cloudant special functions
+<span class="cstat-no" title="statement not covered">    var obj = nano._use(db);</span>
+<span class="cstat-no" title="statement not covered">    obj.geo = geo;</span>
+<span class="cstat-no" title="statement not covered">    obj.bulk_get = bulk_get;</span>
+<span class="cstat-no" title="statement not covered">    obj.get_security = get_security;</span>
+<span class="cstat-no" title="statement not covered">    obj.set_security = set_security;</span>
+<span class="cstat-no" title="statement not covered">    obj.index = index;</span>
+<span class="cstat-no" title="statement not covered">    obj.index.del = index_del;</span>
+<span class="cstat-no" title="statement not covered">    obj.find = find;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return obj;</span>
+  };
+&nbsp;
+  // intercept calls to 'nano.use' to plugin our extensions
+<span class="cstat-no" title="statement not covered">  nano._use = nano.use;</span>
+<span class="cstat-no" title="statement not covered">  nano.use = nano.db.use = use;</span>
+&nbsp;
+&nbsp;
+  // https://docs.cloudant.com/api.html#creating-api-keys
+<span class="cstat-no" title="statement not covered">  var generate_api_key = <span class="fstat-no" title="function not covered">function(callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/api_keys", method: "post" }, callback);</span>
+  };
+&nbsp;
+  // https://docs.cloudant.com/api.html#reading-the-cors-configuration
+<span class="cstat-no" title="statement not covered">  var get_cors = <span class="fstat-no" title="function not covered">function(callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/config/cors" }, callback);</span>
+  };
+&nbsp;
+  // https://docs.cloudant.com/api.html#setting-the-cors-configuration
+<span class="cstat-no" title="statement not covered">  var set_cors = <span class="fstat-no" title="function not covered">function(configuration, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/config/cors",</span>
+                         method: "put",
+                         body: configuration }, callback);
+  };
+&nbsp;
+  // the /set_permissions API call is deprecated
+<span class="cstat-no" title="statement not covered">  var set_permissions = <span class="fstat-no" title="function not covered">function(opts, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    console.error("set_permissions is deprecated. use set_security instead");</span>
+<span class="cstat-no" title="statement not covered">    callback(null, null);</span>
+  };
+&nbsp;
+  // https://docs.cloudant.com/api.html#setting-the-cors-configuration
+<span class="cstat-no" title="statement not covered">  var set_cors = <span class="fstat-no" title="function not covered">function(configuration, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/config/cors",</span>
+                         method: "put",
+                         body: configuration }, callback);
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var get_virtual_hosts = <span class="fstat-no" title="function not covered">function(callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/virtual_hosts",</span>
+                         method: "get"}, callback);
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var add_virtual_host = <span class="fstat-no" title="function not covered">function(opts, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/virtual_hosts",</span>
+                         method: "post",
+                         body: opts }, callback);
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var delete_virtual_host = <span class="fstat-no" title="function not covered">function(opts, callback) {</span></span>
+<span class="cstat-no" title="statement not covered">    return nano.request({path: "_api/v2/user/virtual_hosts",</span>
+                         method: "delete",
+                         body: opts }, callback);
+  };
+&nbsp;
+  // add top-level Cloudant-specific functions
+<span class="cstat-no" title="statement not covered">  nano.ping = ping;</span>
+<span class="cstat-no" title="statement not covered">  nano.get_cors = get_cors;</span>
+<span class="cstat-no" title="statement not covered">  nano.set_cors = set_cors;</span>
+<span class="cstat-no" title="statement not covered">  nano.set_permissions = set_permissions;</span>
+<span class="cstat-no" title="statement not covered">  nano.generate_api_key = generate_api_key;</span>
+<span class="cstat-no" title="statement not covered">  nano.get_virtual_hosts = get_virtual_hosts;</span>
+<span class="cstat-no" title="statement not covered">  nano.add_virtual_host = add_virtual_host;</span>
+<span class="cstat-no" title="statement not covered">  nano.delete_virtual_host = delete_virtual_host;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (callback) {</span>
+<span class="cstat-no" title="statement not covered">    debug('Automatic ping');</span>
+<span class="cstat-no" title="statement not covered">    nano.ping(login, <span class="fstat-no" title="function not covered">function(er, pong, cookie) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (er) {</span>
+<span class="cstat-no" title="statement not covered">        callback(er);</span>
+      } else {
+<span class="cstat-no" title="statement not covered">        if (cookie) {</span>
+<span class="cstat-no" title="statement not covered">          requestDefaults.headers.cookie = cookie;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        callback(null, nano, pong);</span>
+      }
+    });
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return nano;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function ping(login, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var nano = this;</span>
+<span class="cstat-no" title="statement not covered">  var cookie = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  async.series([</span>
+<span class="fstat-no" title="function not covered">    function(done) {</span>
+<span class="cstat-no" title="statement not covered">      if (login &amp;&amp; login.username &amp;&amp; login.password) {</span>
+<span class="cstat-no" title="statement not covered">        done.auth = false;</span>
+<span class="cstat-no" title="statement not covered">        nano.auth(login.username, login.password, <span class="fstat-no" title="function not covered">function(e, b, h) {</span></span>
+<span class="cstat-no" title="statement not covered">          cookie = (h &amp;&amp; h['set-cookie']) || null;</span>
+<span class="cstat-no" title="statement not covered">          if (cookie) {</span>
+<span class="cstat-no" title="statement not covered">            cookie = cookie[0];</span>
+          }
+<span class="cstat-no" title="statement not covered">          done(e, b);</span>
+        });
+      } else {
+<span class="cstat-no" title="statement not covered">        done(null, null);</span>
+      }
+    },
+<span class="fstat-no" title="function not covered">    function(done) {</span>
+<span class="cstat-no" title="statement not covered">      nano.session(<span class="fstat-no" title="function not covered">function(e, b, h) {</span></span>
+<span class="cstat-no" title="statement not covered">        done(e, b);</span>
+      });
+    }, 
+<span class="fstat-no" title="function not covered">    function(done) {</span>
+<span class="cstat-no" title="statement not covered">      nano.relax({db:''}, <span class="fstat-no" title="function not covered">function(e, b, h) {</span></span>
+<span class="cstat-no" title="statement not covered">        done(e, b);</span>
+      })
+    }
+  ], <span class="fstat-no" title="function not covered">function(err, data) {</span>
+<span class="cstat-no" title="statement not covered">    var body = (data &amp;&amp; data[2]) || {};</span>
+<span class="cstat-no" title="statement not covered">    body.userCtx  = (data &amp;&amp; data[1] &amp;&amp; data[1].userCtx) || {};</span>
+<span class="cstat-no" title="statement not covered">    callback(err, body, cookie);</span>
+  });
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 13:55:40 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
